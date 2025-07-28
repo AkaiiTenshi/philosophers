@@ -6,12 +6,28 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 12:02:47 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 14:14:25 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/28 22:47:28 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
+#include <sys/time.h>
+
+long get_time(t_time time)
+{
+	struct timeval t;
+
+	if (gettimeofday(&t, NULL))
+		return(ft_print_error("Failed to gettimeofday"));
+	if (time == S)
+		return (t.tv_sec + (t.tv_usec / 1000000));
+	else if (time == MILLI_S)
+		return ((t.tv_sec * 1000) / (t.tv_usec / 1000));
+	else if ( time == MICRO_S)
+		return ((t.tv_sec * 1000000) / t.tv_usec);
+	else
+		return(ft_print_error("Failed to get correct time input"));
+}
 
 int ft_print_error(char *str)
 {
@@ -19,7 +35,7 @@ int ft_print_error(char *str)
     return (-1);
 }
 
-int mutex_foo(pthread_mutex_t *mutex, t_enum type)
+int mutex_foo(pthread_mutex_t *mutex, t_code type)
 {
     if (type == DESTROY)
     {
@@ -44,7 +60,7 @@ int mutex_foo(pthread_mutex_t *mutex, t_enum type)
     return (0);
 }
 
-int thread_foo(pthread_t *thread, void *(*foo)(void *), void *data, t_enum type)
+int thread_foo(pthread_t *thread, void *(*foo)(void *), void *data, t_code type)
 {
     if (type == CREATE)
     {

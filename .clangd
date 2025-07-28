@@ -1,5 +1,0 @@
-CompileFlags:
-  Add:
-    - -I/Users/akaiissa/42-Code-Odyssey/cercle-3-philosophers/includes
-    - -I/Users/akaiissa/42-Code-Odyssey/cercle-3-philosophers
-

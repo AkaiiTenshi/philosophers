@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 15:54:02 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/28 22:46:24 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ typedef struct s_philo	t_philo;
 /* -- [ Structs ] -- */
 //--------------------------------
 
-typedef enum s_enum
+typedef enum s_time
+{
+	S,
+	MILLI_S,
+	MICRO_S,
+}			t_time;
+
+typedef enum s_code
 {
 	CREATE,
 	INIT,
@@ -36,7 +43,7 @@ typedef enum s_enum
 	UNLOCK,
 	DESTROY,
 	DETACH,
-}						t_enum;
+}						t_code;
 /* -- Fork -- */
 typedef struct s_fork
 {
@@ -84,8 +91,10 @@ int						init(t_data *data);
 /* -- Utils -- */
 int						ft_print_error(char *str);
 int						thread_foo(pthread_t *thread, void *(*foo)(void *),
-							void *data, t_enum type);
-int						mutex_foo(pthread_mutex_t *mutex, t_enum type);
+							void *data, t_code type);
+int						mutex_foo(pthread_mutex_t *mutex, t_code type);
+long get_time(t_time time);
+void better_usleep(long useconds, t_data *data);
 
 /* -- Getters & Setters -- */
 bool    stop_eating(t_data *data);
@@ -93,6 +102,7 @@ bool    boolean_get(pthread_mutex_t *mutex, bool *change);
 void    boolean_set(pthread_mutex_t *mutex, bool change, bool *fresh );
 void    long_set(pthread_mutex_t *mutex, long change, long *fresh );
 long    long_get(pthread_mutex_t *mutex, long *change);
+void	ft_get_philos_ready(t_data *data);
 
 
 #endif

@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ready.c                                        :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 16:02:03 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 21:33:37 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/07/28 22:40:03 by salsoysa          #+#    #+#             */
+/*   Updated: 2025/07/28 22:47:31 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_get_philos_ready(t_data *data)
+void better_usleep(long useconds, t_data *data)
 {
-	while(!boolean_get(&data->mutex_data, &data->philos_r))
-		;
+	long	t;
+	long	past_t;
+	long	remaining;
+
+	t = get_time(MICRO_S);
+	while (get_time(MICRO_S) - t < useconds)
+	{
+		if (stop_eating(data))
+			break ;
+		past_t = get_time(MICRO_S) - t;
+		remaining = useconds - past_t;
+		if (remaining > 1000)
+			usleep(useconds / 2);
+		else
+		{
+			while(get_time(MICRO_S) - t < useconds)
+				;
+		}
+	}
 }

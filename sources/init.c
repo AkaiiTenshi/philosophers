@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 15:26:47 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:44:47 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ int	init(t_data *data)
 	int	i;
 
 	i = -1;
-    data->end = false;
-    data->philos_r = false;
+	data->end = false;
+	data->philos_r = false;
 	data->philos = malloc(data->nu_philo * sizeof(t_philo));
 	if (!data->philos)
 		return (-1);
-    data->forks = malloc(data->nu_philo * sizeof(t_fork));
-    if (!data->forks)
-        return (ft_print_error("Failed to malloc forks"));
-    if (mutex_foo(&data->mutex_data, INIT))
-        return (-1);
+	data->forks = malloc(data->nu_philo * sizeof(t_fork));
+	if (!data->forks)
+		return (ft_print_error("Failed to malloc forks"));
+	if (mutex_foo(&data->mutex_data, INIT))
+		return (-1);
 	while (++i < data->nu_philo)
 	{
 		if (mutex_foo(&data->forks[i].fork, INIT) == -1)

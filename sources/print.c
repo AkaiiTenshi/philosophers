@@ -1,19 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_ready.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 16:02:03 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 21:33:37 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/07/28 22:47:11 by salsoysa          #+#    #+#             */
+/*   Updated: 2025/07/28 22:47:25 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_get_philos_ready(t_data *data)
-{
-	while(!boolean_get(&data->mutex_data, &data->philos_r))
-		;
-}

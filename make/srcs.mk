@@ -1,0 +1,8 @@
+SRCS_PATH = ./sources/
+SRCS += main.c
+SRCS += init.c
+SRCS += parsing.c
+SRCS += get_and_set.c
+SRCS += get_ready.c
+SRCS += eating.c
+SRCS += utils.c
