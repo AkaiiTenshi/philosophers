@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   eating.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 17:23:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 14:58:34 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/07/28 14:59:08 by salsoysa          #+#    #+#             */
+/*   Updated: 2025/07/28 16:01:06 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int philo(char **av)
+void *eating_routine(void *data)
 {
-    t_data  data;
+    t_philo *philo;
 
-    if (parse(&data, av) == -1)
-        return (-1);
-    if (init(&data) == -1)
-        return (-1);
-    //eating(&data);
-    //clean(&data);
-    return (0);
+    philo = (t_philo *)data;
+    ft_get_philos_ready(philo->data);
 }
 
-int main(int ac, char **av)
+int eating(t_data *data)
 {
-    if ( ac == 5 || ac == 6)
-    {
-        return(philo(av));
-    }
+    int i;
+
+    i = -1;
+    if (data->nu_philo == 1)
+        ;//coming soon
     else
     {
-        printf("Correct input: ./philo nu_of_philos tt_die tt_eat tt_sleep");
-        printf("[nu_of_times_each_philo_must_eat]\n");
-        return (-1);
+        while (++i < data->nu_philo)
+        {
+            thread_foo(&data->philos[i].thread_i, eating_routine, &data->philos[i], CREATE);
+        }
+        boolean_set(&data->mutex_data, &data->philos_r, true);
     }
 }
