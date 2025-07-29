@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:02:03 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 21:33:37 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:21:00 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_get_philos_ready(t_data *data)
 {
-	while(!boolean_get(&data->mutex_data, &data->philos_r))
+	while(!boolean_get(&data->data_lock, &data->philos_r))
 		;
 }

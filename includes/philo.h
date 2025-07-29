@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 22:46:24 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:45:30 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef enum s_time
 	S,
 	MILLI_S,
 	MICRO_S,
-}			t_time;
+}						t_time;
 
 typedef enum s_code
 {
@@ -44,6 +44,16 @@ typedef enum s_code
 	DESTROY,
 	DETACH,
 }						t_code;
+
+typedef enum s_dinner
+{
+	THINKING,
+	SLEEPING,
+	EATING,
+	TOOK_FORK1,
+	TOOK_FORK2,
+	DIED,
+}						t_dinner;
 /* -- Fork -- */
 typedef struct s_fork
 {
@@ -56,13 +66,14 @@ typedef struct s_data
 {
 	long				start;
 	bool				end;
-    bool                philos_r;
+	bool				philos_r;
 	long				nu_philo;
 	long				ttd;
 	long				tts;
 	long				tte;
 	long				max_meals;
-    pthread_mutex_t     mutex_data;
+	pthread_mutex_t		data_lock;
+	pthread_mutex_t		print_lock;
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
@@ -75,6 +86,7 @@ struct					s_philo
 	bool				done;
 	t_fork				*first_f;
 	t_fork				*second_f;
+	pthread_mutex_t		philo_lock;
 	int					id;
 	pthread_t			thread_i;
 	t_data				*data;
@@ -87,22 +99,24 @@ struct					s_philo
 /* -- Core -- */
 int						parse(t_data *data, char **av);
 int						init(t_data *data);
+void	printfoo(t_dinner state, t_philo *philo);
 
 /* -- Utils -- */
 int						ft_print_error(char *str);
 int						thread_foo(pthread_t *thread, void *(*foo)(void *),
 							void *data, t_code type);
 int						mutex_foo(pthread_mutex_t *mutex, t_code type);
-long get_time(t_time time);
-void better_usleep(long useconds, t_data *data);
+long					get_time(t_time time);
+void					better_usleep(long useconds, t_data *data);
 
 /* -- Getters & Setters -- */
-bool    stop_eating(t_data *data);
-bool    boolean_get(pthread_mutex_t *mutex, bool *change);
-void    boolean_set(pthread_mutex_t *mutex, bool change, bool *fresh );
-void    long_set(pthread_mutex_t *mutex, long change, long *fresh );
-long    long_get(pthread_mutex_t *mutex, long *change);
-void	ft_get_philos_ready(t_data *data);
-
+bool					stop_eating(t_data *data);
+bool					boolean_get(pthread_mutex_t *mutex, bool *change);
+void					boolean_set(pthread_mutex_t *mutex, bool change,
+							bool *fresh);
+void					long_set(pthread_mutex_t *mutex, long change,
+							long *fresh);
+long					long_get(pthread_mutex_t *mutex, long *change);
+void					ft_get_philos_ready(t_data *data);
 
 #endif

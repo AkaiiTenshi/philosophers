@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:29:14 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 15:54:00 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:20:59 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ bool    boolean_get(pthread_mutex_t *mutex, bool *change)
 
 bool    stop_eating(t_data *data)
 {
-    return (boolean_get(&data->mutex_data, &data->end));
+    return (boolean_get(&data->data_lock, &data->end));
 }

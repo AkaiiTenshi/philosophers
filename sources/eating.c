@@ -6,13 +6,30 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:59:08 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 22:46:58 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:59:45 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*eating_routine(void *data)
+static void eating_routine(t_philo *philo)
+{
+	mutex_foo(&philo->first_f->fork, LOCK);
+	printfoo(TOOK_FORK1, philo);
+	mutex_foo(&philo->second_f->fork, LOCK);
+	printfoo(TOOK_FORK2, philo);
+
+	long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);
+	philo->nu_meals++;
+	printfoo(EATING, philo);
+	better_usleep(philo->data->tte, philo->data);
+	if (philo->data->max_meals > 0 && philo->nu_meals == philo->data->max_meals)
+		boolean_set(&philo->philo_lock, true, &philo->done);
+	mutex_foo(&philo->first_f->fork, UNLOCK);
+	mutex_foo(&philo->first_f->fork, UNLOCK);
+}
+
+void	*eating_foo(void *data)
 {
 	t_philo	*philo;
 
@@ -22,6 +39,8 @@ void	*eating_routine(void *data)
 	{
 		if (philo->done)
 			break ;
+		printfoo(SLEEPING, philo);
+		better_usleep(philo->data->tts, philo->data);
 	}
 	return (NULL);
 }
@@ -37,11 +56,11 @@ int	eating(t_data *data)
 	{
 		while (++i < data->nu_philo)
 		{
-			thread_foo(&data->philos[i].thread_i, eating_routine,
+			thread_foo(&data->philos[i].thread_i, eating_foo,
 				&data->philos[i], CREATE);
 		}
 		data->start = get_time(MILLI_S);
-		boolean_set(&data->mutex_data, true, &data->philos_r);
+		boolean_set(&data->data_lock, true, &data->philos_r);
 		i = -1;
 		while (++i < data->nu_philo)
 			thread_foo(&data->philos[i].thread_i, NULL, NULL, JOIN);
