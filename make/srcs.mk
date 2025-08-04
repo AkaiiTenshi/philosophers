@@ -6,3 +6,5 @@ SRCS += get_and_set.c
 SRCS += get_ready.c
 SRCS += eating.c
 SRCS += utils.c
+SRCS += print.c
+SRCS += utils_2.c

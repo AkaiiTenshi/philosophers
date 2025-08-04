@@ -6,11 +6,16 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:59:08 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 14:59:45 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:24:15 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void thinking_routine(t_philo *philo)
+{
+    printfoo(THINKING, philo);
+}
 
 static void eating_routine(t_philo *philo)
 {
@@ -26,7 +31,7 @@ static void eating_routine(t_philo *philo)
 	if (philo->data->max_meals > 0 && philo->nu_meals == philo->data->max_meals)
 		boolean_set(&philo->philo_lock, true, &philo->done);
 	mutex_foo(&philo->first_f->fork, UNLOCK);
-	mutex_foo(&philo->first_f->fork, UNLOCK);
+	mutex_foo(&philo->second_f->fork, UNLOCK);
 }
 
 void	*eating_foo(void *data)
@@ -39,8 +44,10 @@ void	*eating_foo(void *data)
 	{
 		if (philo->done)
 			break ;
+        eating_routine(philo);
 		printfoo(SLEEPING, philo);
 		better_usleep(philo->data->tts, philo->data);
+        thinking_routine(philo);
 	}
 	return (NULL);
 }

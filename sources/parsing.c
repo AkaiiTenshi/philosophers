@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:14:34 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/28 12:09:33 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:29:26 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parse(t_data *data, char **av)
 {
 	data->nu_philo = ft_atol(av[1]);
 	data->ttd = ft_atol(av[2]) * 1000;
-	data->tte = ft_atol(av[3]) * 1100;
+	data->tte = ft_atol(av[3]) * 1000;
 	data->tts = ft_atol(av[4]) * 1000;
 	if (data->nu_philo == -1 || data->ttd == -1 || data->tte == -1
 		|| data->tts == -1)

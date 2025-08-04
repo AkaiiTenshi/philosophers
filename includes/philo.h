@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 14:45:30 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:26:52 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ struct					s_philo
 int						parse(t_data *data, char **av);
 int						init(t_data *data);
 void	printfoo(t_dinner state, t_philo *philo);
+int	eating(t_data *data);
 
 /* -- Utils -- */
 int						ft_print_error(char *str);

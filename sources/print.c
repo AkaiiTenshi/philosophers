@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 22:47:11 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 12:51:31 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:37:56 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	printfoo(t_dinner state, t_philo *philo)
 {
 	long	t;
 
-	t = get_time(MILLI_S);
+	t = get_time(MILLI_S) - philo->data->start;
 	mutex_foo(&philo->data->print_lock, LOCK);
 	if ((state == TOOK_FORK1 || state == TOOK_FORK2)
 		&& !stop_eating(philo->data))
