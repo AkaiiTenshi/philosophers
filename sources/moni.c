@@ -16,10 +16,14 @@ static bool he_dead(t_philo *philo)
 {
     long t;
     long ttd;
+    long last_meal;
 
     if (boolean_get(&philo->philo_lock, &philo->done))
         return (false);
-    t = get_time(MILLI_S) - long_get(&philo->philo_lock, &philo->last);
+    last_meal = long_get(&philo->philo_lock, &philo->last);
+    if (last_meal == 0)  // Don't check until initialized
+        return (false);
+    t = get_time(MILLI_S) - last_meal;
     ttd = philo->data->ttd / 1000;
 
     if ( t > ttd)
@@ -45,8 +49,26 @@ void    *moni_foo(void *info)
             {
                 boolean_set(&data->data_lock, true, &data->end);
                 printfoo(DIED, data->philos + i);
+                return (NULL);
             }
         }
+        // Check if all philosophers have eaten enough meals
+        if (data->max_meals > 0)
+        {
+            i = -1;
+            int finished_eating = 0;
+            while (++i < data->nu_philo)
+            {
+                if (get_meals_count(&data->philos[i]) >= data->max_meals)
+                    finished_eating++;
+            }
+            if (finished_eating == data->nu_philo)
+            {
+                boolean_set(&data->data_lock, true, &data->end);
+                return (NULL);
+            }
+        }
+        usleep(1000);  // Small delay to prevent busy waiting
     }
     return (NULL);
 }

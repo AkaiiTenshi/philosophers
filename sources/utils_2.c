@@ -26,7 +26,7 @@ void better_usleep(long useconds, t_data *data)
 		past_t = get_time(MICRO_S) - t;
 		remaining = useconds - past_t;
 		if (remaining > 1000)
-			usleep(useconds / 2);
+			usleep(500);
 		else
 		{
 			while(get_time(MICRO_S) - t < useconds)

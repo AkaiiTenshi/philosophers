@@ -48,3 +48,8 @@ bool    stop_eating(t_data *data)
 {
     return (boolean_get(&data->data_lock, &data->end));
 }
+
+long    get_meals_count(t_philo *philo)
+{
+    return (long_get(&philo->philo_lock, &philo->nu_meals));
+}

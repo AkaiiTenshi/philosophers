@@ -34,6 +34,7 @@ void    *solo(void *info)
     ft_get_philos_ready(philo->data);
     long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);
     iter_foo(&philo->data->data_lock, &philo->data->nu_threads);
+	printfoo(TOOK_FORK1, philo);
     while (!(stop_eating(philo->data)))
         usleep(200);
     return (NULL);
@@ -46,10 +47,13 @@ static void	eating_routine(t_philo *philo)
 	mutex_foo(&philo->second_f->fork, LOCK);
 	printfoo(TOOK_FORK2, philo);
 	long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);
+	mutex_foo(&philo->philo_lock, LOCK);
 	philo->nu_meals++;
+	mutex_foo(&philo->philo_lock, UNLOCK);
 	printfoo(EATING, philo);
 	better_usleep(philo->data->tte, philo->data);
-	if (philo->data->max_meals > 0 && philo->nu_meals == philo->data->max_meals)
+	long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);  // Update after eating
+	if (philo->data->max_meals > 0 && get_meals_count(philo) >= philo->data->max_meals)
 		boolean_set(&philo->philo_lock, true, &philo->done);
 	mutex_foo(&philo->first_f->fork, UNLOCK);
 	mutex_foo(&philo->second_f->fork, UNLOCK);

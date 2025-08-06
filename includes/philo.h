@@ -127,6 +127,7 @@ void					boolean_set(pthread_mutex_t *mutex, bool change,
 void					long_set(pthread_mutex_t *mutex, long change,
 							long *fresh);
 long					long_get(pthread_mutex_t *mutex, long *change);
+long					get_meals_count(t_philo *philo);
 void					ft_get_philos_ready(t_data *data);
 
 #endif
