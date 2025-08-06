@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 14:08:52 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:04:42 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_init_philo(t_data *data)
 		philo->done = false;
 		philo->nu_meals = 0;
 		philo->data = data;
-		mutex_foo(&philo->philo_lock, INIT); //pas oublier de check pour error ici, potentiellement je dois changer cette fonction en static int et du coup rajouter return (ft_init_philo(data); dans init
+		mutex_foo(&philo->philo_lock, INIT);
 		ft_give_fork(philo, data->forks, i);
 	}
 }
@@ -48,7 +48,7 @@ int	init(t_data *data)
 	i = -1;
 	data->end = false;
 	data->philos_r = false;
-    data->nu_threads = 0;
+	data->nu_threads = 0;
 	data->philos = malloc(data->nu_philo * sizeof(t_philo));
 	if (!data->philos)
 		return (-1);

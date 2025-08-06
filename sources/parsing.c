@@ -79,7 +79,7 @@ int	parse(t_data *data, char **av)
 	if (data->nu_philo == -1 || data->ttd == -1 || data->tte == -1
 		|| data->tts == -1)
 		return (-1);
-	if (data->ttd < 6000 || data->tte < 6000 || data->tts < 6000)
+	if (data->ttd < 60000 || data->tte < 60000 || data->tts < 60000)
 		return (ft_print_error("Time limits must be higher than 60ms"));
 	if (av[5])
 		data->max_meals = ft_atol(av[5]);

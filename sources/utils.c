@@ -19,12 +19,12 @@ long get_time(t_time time)
 
 	if (gettimeofday(&t, NULL))
 		return(ft_print_error("Failed to gettimeofday"));
-	if (time == S)
-		return (t.tv_sec + (t.tv_usec / 1000000));
-	else if (time == MILLI_S)
+	if (time == MILLI_S)
 		return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
-	else if ( time == MICRO_S)
+	else if (time == MICRO_S)
 		return ((t.tv_sec * 1000000) + t.tv_usec);
+	else if (time == S)
+		return (t.tv_sec + (t.tv_usec / 1000000));
 	else
 		return(ft_print_error("Failed to get correct time input"));
 }

@@ -6,50 +6,47 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:29:14 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 16:20:59 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:11:12 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long    long_get(pthread_mutex_t *mutex, long *change)
+long	long_get(pthread_mutex_t *mutex, long *change)
 {
-    long    fresh;
-    mutex_foo(mutex, LOCK);
-    fresh = *change;
-    mutex_foo(mutex, UNLOCK);
-    return (fresh);
+	long	fresh;
+
+	mutex_foo(mutex, LOCK);
+	fresh = *change;
+	mutex_foo(mutex, UNLOCK);
+	return (fresh);
 }
 
-void    long_set(pthread_mutex_t *mutex, long change, long *fresh )
+void	long_set(pthread_mutex_t *mutex, long change, long *fresh)
 {
-    mutex_foo(mutex, LOCK);
-    *fresh = change;
-    mutex_foo(mutex, UNLOCK);
+	mutex_foo(mutex, LOCK);
+	*fresh = change;
+	mutex_foo(mutex, UNLOCK);
 }
 
-void    boolean_set(pthread_mutex_t *mutex, bool change, bool *fresh )
+void	boolean_set(pthread_mutex_t *mutex, bool change, bool *fresh)
 {
-    mutex_foo(mutex, LOCK);
-    *fresh = change;
-    mutex_foo(mutex, UNLOCK);
+	mutex_foo(mutex, LOCK);
+	*fresh = change;
+	mutex_foo(mutex, UNLOCK);
 }
 
-bool    boolean_get(pthread_mutex_t *mutex, bool *change)
+bool	boolean_get(pthread_mutex_t *mutex, bool *change)
 {
-    bool    fresh;
-    mutex_foo(mutex, LOCK);
-    fresh = *change;
-    mutex_foo(mutex, UNLOCK);
-    return (fresh);
+	bool	fresh;
+
+	mutex_foo(mutex, LOCK);
+	fresh = *change;
+	mutex_foo(mutex, UNLOCK);
+	return (fresh);
 }
 
-bool    stop_eating(t_data *data)
+bool	stop_eating(t_data *data)
 {
-    return (boolean_get(&data->data_lock, &data->end));
-}
-
-long    get_meals_count(t_philo *philo)
-{
-    return (long_get(&philo->philo_lock, &philo->nu_meals));
+	return (boolean_get(&data->data_lock, &data->end));
 }

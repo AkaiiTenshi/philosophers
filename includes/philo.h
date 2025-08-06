@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 15:29:34 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:04:23 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void					shift_philo(t_philo *philo);
 void					iter_foo(pthread_mutex_t *mutex, long *nu);
 void					*moni_foo(void *info);
 void					clean(t_data *data);
-void	thinking_routine(t_philo *philo, bool started);
+void					thinking_routine(t_philo *philo);
 
 /* -- Getters & Setters -- */
 bool					stop_eating(t_data *data);

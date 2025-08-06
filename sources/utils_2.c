@@ -14,23 +14,24 @@
 
 void better_usleep(long useconds, t_data *data)
 {
-	long	t;
-	long	past_t;
-	long	remaining;
+	long	sleep_time;
 
-	t = get_time(MICRO_S);
-	while (get_time(MICRO_S) - t < useconds)
+	// Pour Valgrind : éviter les boucles avec get_time()
+	// Dormir en gros blocs pour réduire les appels système
+	sleep_time = useconds;
+	
+	// Dormir par blocs de maximum 5ms pour permettre l'interruption
+	while (sleep_time > 0 && !stop_eating(data))
 	{
-		if (stop_eating(data))
-			break ;
-		past_t = get_time(MICRO_S) - t;
-		remaining = useconds - past_t;
-		if (remaining > 1000)
-			usleep(500);
+		if (sleep_time > 5000)  // Plus de 5ms
+		{
+			usleep(5000);
+			sleep_time -= 5000;
+		}
 		else
 		{
-			while(get_time(MICRO_S) - t < useconds)
-				;
+			usleep(sleep_time);
+			break;
 		}
 	}
 }

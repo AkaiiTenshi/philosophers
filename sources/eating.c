@@ -6,17 +6,16 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:59:08 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 15:30:34 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:00:26 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	thinking_routine(t_philo *philo, bool started)
+void	thinking_routine(t_philo *philo)
 {
     long ttt;
 
-    if (!started)
         printfoo(THINKING, philo);
     if (philo->data->nu_philo % 2)
         return ;
@@ -36,7 +35,12 @@ void    *solo(void *info)
     iter_foo(&philo->data->data_lock, &philo->data->nu_threads);
 	printfoo(TOOK_FORK1, philo);
     while (!(stop_eating(philo->data)))
-        usleep(200);
+    {
+        usleep(10000);  // 10ms pour Valgrind - gros blocs de sommeil
+        // Vérification simple une seule fois par itération
+        if (get_time(MILLI_S) - philo->data->start > philo->data->ttd / 1000)
+            break;
+    }
     return (NULL);
 }
 
@@ -75,7 +79,7 @@ void	*eating_foo(void *data)
 		eating_routine(philo);
 		printfoo(SLEEPING, philo);
 		better_usleep(philo->data->tts, philo->data);
-		thinking_routine(philo, false);
+		thinking_routine(philo);
 	}
 	return (NULL);
 }
