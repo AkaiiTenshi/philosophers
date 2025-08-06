@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 19:26:52 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:29:34 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data
 	long				start;
 	bool				end;
 	bool				philos_r;
+	long				nu_threads;
 	long				nu_philo;
 	long				ttd;
 	long				tts;
@@ -74,6 +75,7 @@ typedef struct s_data
 	long				max_meals;
 	pthread_mutex_t		data_lock;
 	pthread_mutex_t		print_lock;
+	pthread_t			moni;
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
@@ -99,8 +101,8 @@ struct					s_philo
 /* -- Core -- */
 int						parse(t_data *data, char **av);
 int						init(t_data *data);
-void	printfoo(t_dinner state, t_philo *philo);
-int	eating(t_data *data);
+void					printfoo(t_dinner state, t_philo *philo);
+int						eating(t_data *data);
 
 /* -- Utils -- */
 int						ft_print_error(char *str);
@@ -109,6 +111,13 @@ int						thread_foo(pthread_t *thread, void *(*foo)(void *),
 int						mutex_foo(pthread_mutex_t *mutex, t_code type);
 long					get_time(t_time time);
 void					better_usleep(long useconds, t_data *data);
+bool					threads_up(pthread_mutex_t *mutex, long *threads,
+							long nu_philo);
+void					shift_philo(t_philo *philo);
+void					iter_foo(pthread_mutex_t *mutex, long *nu);
+void					*moni_foo(void *info);
+void					clean(t_data *data);
+void	thinking_routine(t_philo *philo, bool started);
 
 /* -- Getters & Setters -- */
 bool					stop_eating(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:23:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 19:26:29 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:03:28 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int philo(char **av)
     if (init(&data) == -1)
         return (-1);
     eating(&data);
-    //clean(&data);
+    clean(&data);
     return (0);
 }
 

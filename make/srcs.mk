@@ -8,3 +8,5 @@ SRCS += eating.c
 SRCS += utils.c
 SRCS += print.c
 SRCS += utils_2.c
+SRCS += clean.c
+SRCS += moni.c
