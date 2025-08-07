@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:13:51 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 23:04:23 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:01:24 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # include <unistd.h>
 
 typedef struct s_philo	t_philo;
+
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define WHITE "\033[0;37m"
 
 //--------------------------------
 /* -- [ Structs ] -- */
@@ -102,7 +110,7 @@ struct					s_philo
 int						parse(t_data *data, char **av);
 int						init(t_data *data);
 void					printfoo(t_dinner state, t_philo *philo);
-int						eating(t_data *data);
+int						dinner_table(t_data *data);
 
 /* -- Utils -- */
 int						ft_print_error(char *str);

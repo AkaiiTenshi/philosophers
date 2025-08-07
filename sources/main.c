@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:23:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 23:03:57 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:57:19 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	philo(char **av)
 		return (-1);
 	if (init(&data) == -1)
 		return (-1);
-	eating(&data);
+	dinner_table(&data);
 	clean(&data);
 	return (0);
 }

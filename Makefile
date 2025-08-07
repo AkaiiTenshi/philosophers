@@ -21,14 +21,14 @@ default: help all
 all: ${NAME}
 
 help:
-	@	echo -ne "\r\033[2K" $(WHITE) "----------------------------------------------"${NC}"\n"
+	@	echo -ne "\r\033[2K" $(WHITE) "--------------------------------------------------------------------"${NC}"\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "all       →  "${NC}"Compile the program.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "clean     →  "${NC}"Removes temporary files.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "fclean    →  "${NC}"Deletes all generated files.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "re        →  "${NC}"Rebuilds the project.\n"
-	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "valgrind  →  "${NC}"Check for memory leaks.\n"
-	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "libft     →  "${NC}"Rebuilds libft.\n"
-	@	echo -ne "\r\033[2K" $(WHITE) "----------------------------------------------"${NC}"\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "formule pair →  "${NC}"time_to_die >= 2 * time_to_eat + 10\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "formule impair →  "${NC}"time_to_die >= 2 * time_to_eat * N / (N - 1) + 10\n"
+	@	echo -ne "\r\033[2K" $(WHITE) "--------------------------------------------------------------------"${NC}"\n"
 
 ${OBJS_PATH}/%.o: %.c Makefile includes/philo.h
 	@	mkdir -p ${OBJS_PATH}
@@ -36,7 +36,7 @@ ${OBJS_PATH}/%.o: %.c Makefile includes/philo.h
 	@	${CC} ${CFLAGS} -c $< -o $@ ${INC}
 
 ${NAME}: ${OBJS}
-	@	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${INC}	
+	@	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${INC}
 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "→ $(NAME) OK!\n"$(NC)
 
 clean:	

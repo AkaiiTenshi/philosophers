@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:57:37 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 23:10:13 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:59:29 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	clean(t_data *data)
 	{
 		philo = data->philos + i;
 		mutex_foo(&philo->philo_lock, DESTROY);
+		mutex_foo(&data->forks[i].fork, DESTROY);
 		i++;
 	}
 	mutex_foo(&data->data_lock, DESTROY);
