@@ -29,8 +29,8 @@ void	shift_philo(t_philo *philo)
 {
 	if (philo->data->nu_philo % 2 == 0)
 	{
-		if (philo->id % 2)
-			better_usleep(30000, philo->data);
+		if (philo->id % 2 == 0)
+			better_usleep(3000, philo->data);
 	}
 	else
 	{

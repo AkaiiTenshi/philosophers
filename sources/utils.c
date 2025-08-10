@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 12:02:47 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/07 14:54:11 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 14:39:43 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ long	get_time(t_time time)
 	else if (time == S)
 		return (t.tv_sec + (t.tv_usec / 1000000));
 	else
-		return (ft_print_error("Failed to get correct time input"));
+		return (ft_print_error("Failed to get correct time input"), 42);
 }
 
 int	ft_print_error(char *str)
@@ -40,22 +40,22 @@ int	mutex_foo(pthread_mutex_t *mutex, t_code type)
 	if (type == DESTROY)
 	{
 		if (pthread_mutex_destroy(mutex))
-			return (ft_print_error("Failed to destroy mutex"));
+			return (ft_print_error("Failed to destroy mutex"), -1);
 	}
 	if (type == UNLOCK)
 	{
 		if (pthread_mutex_unlock(mutex))
-			return (ft_print_error("Failed to unlock mutex"));
+			return (ft_print_error("Failed to unlock mutex"), -1);
 	}
 	if (type == LOCK)
 	{
 		if (pthread_mutex_lock(mutex))
-			return (ft_print_error("Failed to lock mutex"));
+			return (ft_print_error("Failed to lock mutex"), -1);
 	}
 	if (type == INIT)
 	{
 		if (pthread_mutex_init(mutex, NULL))
-			return (ft_print_error("Failed to init mutex"));
+			return (ft_print_error("Failed to init mutex"), -1);
 	}
 	return (0);
 }
@@ -65,17 +65,17 @@ int	thread_foo(pthread_t *thread, void *(*foo)(void *), void *data, t_code type)
 	if (type == CREATE)
 	{
 		if (pthread_create(thread, NULL, foo, data))
-			return (ft_print_error("Failed to create thread"));
+			return (ft_print_error("Failed to create thread"), -1);
 	}
 	if (type == JOIN)
 	{
 		if (pthread_join(*thread, NULL))
-			return (ft_print_error("Failed to join thread"));
+			return (ft_print_error("Failed to join thread"), -1);
 	}
 	if (type == DETACH)
 	{
 		if (pthread_detach(*thread))
-			return (ft_print_error("Failed to detach thread"));
+			return (ft_print_error("Failed to detach thread"), -1);
 	}
 	return (0);
 }

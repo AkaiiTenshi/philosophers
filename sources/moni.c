@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:49:50 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/10 13:37:57 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 14:54:11 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*moni_foo(void *info)
 
 	data = (t_data *)info;
 	while (!threads_up(&data->data_lock, &data->nu_threads, data->nu_philo))
-		usleep(5000);
+		usleep(1000);
 	while (!stop_eating(data))
 	{
 		i = -1;
@@ -67,9 +67,4 @@ void	*moni_foo(void *info)
 		}
 	}
 	return (NULL);
-}
-
-long	get_meals_count(t_philo *philo)
-{
-	return (long_get(&philo->philo_lock, &philo->nu_meals));
 }
