@@ -6,7 +6,7 @@
 /*   By: salsoysa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:14:34 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/29 19:29:26 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:54:30 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static long	ft_atol(char const *str)
 	i = 0;
 	str = args_check(str);
 	if (!str)
-		return (ft_print_error("Found an error during parsing"));
+		return (ft_print_error("Found an error during parsing"), -1);
 	while (str[i] && str[i] == '0')
 		i++;
 	while (str[i] && ft_isdigit(str[i]))
@@ -74,10 +74,13 @@ int	parse(t_data *data, char **av)
 {
 	data->nu_philo = ft_atol(av[1]);
 	data->ttd = ft_atol(av[2]) * 1000;
+	if (data->ttd == -1000)
+		return (-1);
 	data->tte = ft_atol(av[3]) * 1000;
+	if (data->tte == -1000)
+		return (-1);
 	data->tts = ft_atol(av[4]) * 1000;
-	if (data->nu_philo == -1 || data->ttd == -1 || data->tte == -1
-		|| data->tts == -1)
+	if (data->tts == -1000)
 		return (-1);
 	if (data->ttd < 60000 || data->tte < 60000 || data->tts < 60000)
 		return (ft_print_error("Time limits must be higher than 60ms"));

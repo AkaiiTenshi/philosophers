@@ -15,7 +15,7 @@
 void	ft_get_philos_ready(t_data *data)
 {
 	while (!boolean_get(&data->data_lock, &data->philos_r))
-		;
+		usleep(100);
 }
 
 void	iter_foo(pthread_mutex_t *mutex, long *nu)
