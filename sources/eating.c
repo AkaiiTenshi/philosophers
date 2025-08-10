@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:59:08 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/10 08:00:37 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 08:24:43 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	thinking_routine(t_philo *philo)
 {
-    long    tte;
-    long    ttt;
-    long    tts;
+	long	tte;
+	long	ttt;
+	long	tts;
 
-    printfoo(THINKING, philo);
-    if (philo->data->nu_philo % 2 == 0)
-        return ;
-    tte = philo->data->tte;
-    tts = philo->data->tts;
-    ttt = (tte * 2) - tts;
-    if (ttt < 0)
-        ttt = 0;
-    better_usleep(ttt * 0.31, philo->data);
+	printfoo(THINKING, philo);
+	if (philo->data->nu_philo % 2 == 0)
+		return ;
+	tte = philo->data->tte;
+	tts = philo->data->tts;
+	ttt = (tte * 2) - tts;
+	if (ttt < 0)
+		ttt = 0;
+	better_usleep(ttt * 0.31, philo->data);
 }
 
 void	*solo(void *info)
@@ -39,7 +39,7 @@ void	*solo(void *info)
 	iter_foo(&philo->data->data_lock, &philo->data->nu_threads);
 	printfoo(TOOK_FORK1, philo);
 	while (!(stop_eating(philo->data)))
-        better_usleep(200, philo->data);
+		better_usleep(200, philo->data);
 	return (NULL);
 }
 
@@ -49,12 +49,11 @@ static void	eating_routine(t_philo *philo)
 	printfoo(TOOK_FORK1, philo);
 	mutex_foo(&philo->second_f->fork, LOCK);
 	printfoo(TOOK_FORK2, philo);
-    long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);
+	long_set(&philo->philo_lock, get_time(MILLI_S), &philo->last);
 	philo->nu_meals++;
-    printfoo(EATING, philo);
-    better_usleep(philo->data->tte, philo->data);
-	if (philo->data->max_meals > 0
-		&& philo->nu_meals >= philo->data->max_meals)
+	printfoo(EATING, philo);
+	better_usleep(philo->data->tte, philo->data);
+	if (philo->data->max_meals > 0 && philo->nu_meals >= philo->data->max_meals)
 		boolean_set(&philo->philo_lock, true, &philo->done);
 	mutex_foo(&philo->first_f->fork, UNLOCK);
 	mutex_foo(&philo->second_f->fork, UNLOCK);

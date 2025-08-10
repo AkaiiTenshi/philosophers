@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:49:50 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/10 08:07:52 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 08:25:14 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ static bool	he_dead(t_philo *philo)
 	return (false);
 }
 
-//static bool	meals_check(t_data *data)
+// static bool	meals_check(t_data *data)
 //{
-	//int	i;
-	//int	finished_eating;
+// int	i;
+// int	finished_eating;
 //
-	//i = -1;
-	//finished_eating = 0;
-	//while (++i < data->nu_philo)
-	//{
-		//if (get_meals_count(&data->philos[i]) >= data->max_meals)
-			//finished_eating++;
-	//}
-	//if (finished_eating == data->nu_philo)
-	//{
-		//boolean_set(&data->data_lock, true, &data->end);
-		//return (true);
-	//}
-	//return (false);
+// i = -1;
+// finished_eating = 0;
+// while (++i < data->nu_philo)
+//{
+// if (get_meals_count(&data->philos[i]) >= data->max_meals)
+// finished_eating++;
+//}
+// if (finished_eating == data->nu_philo)
+//{
+// boolean_set(&data->data_lock, true, &data->end);
+// return (true);
+//}
+// return (false);
 //}
 
 void	*moni_foo(void *info)
@@ -61,7 +61,7 @@ void	*moni_foo(void *info)
 		{
 			if (he_dead(data->philos + i))
 			{
-                printfoo(DIED, data->philos + i);
+				printfoo(DIED, data->philos + i);
 				boolean_set(&data->data_lock, true, &data->end);
 			}
 		}
