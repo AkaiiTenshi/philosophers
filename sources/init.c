@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:16 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/08/06 23:04:42 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/08/10 07:40:51 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_give_fork(t_philo *philo, t_fork *forks, int pos)
 {
 	philo->first_f = &forks[(pos + 1) % philo->data->nu_philo];
 	philo->second_f = &forks[pos];
-	if (philo->id % 2)
+	if (philo->id % 2 == 0)
 	{
 		philo->first_f = &forks[pos];
 		philo->second_f = &forks[(pos + 1) % philo->data->nu_philo];
@@ -55,9 +55,9 @@ int	init(t_data *data)
 	data->forks = malloc(data->nu_philo * sizeof(t_fork));
 	if (!data->forks)
 		return (ft_print_error("Failed to malloc forks"));
-	if (mutex_foo(&data->data_lock, INIT))
-		return (-1);
 	if (mutex_foo(&data->print_lock, INIT))
+		return (-1);
+	if (mutex_foo(&data->data_lock, INIT))
 		return (-1);
 	while (++i < data->nu_philo)
 	{
